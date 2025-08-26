@@ -1,0 +1,717 @@
+{
+  "brands": [
+    {
+      "name": "苹果",
+      "logo": "https://example.com/apple-logo.png",
+      "description": "美国科技公司，专注于高端智能手机",
+      "country": "美国",
+      "website": "https://www.apple.com"
+    },
+    {
+      "name": "三星",
+      "logo": "https://example.com/samsung-logo.png",
+      "description": "韩国科技巨头，全球智能手机市场领导者之一",
+      "country": "韩国",
+      "website": "https://www.samsung.com"
+    },
+    {
+      "name": "华为",
+      "logo": "https://example.com/huawei-logo.png",
+      "description": "中国领先的科技公司，专注于通信技术和消费电子产品",
+      "country": "中国",
+      "website": "https://www.huawei.com"
+    },
+    {
+      "name": "小米",
+      "logo": "https://example.com/xiaomi-logo.png",
+      "description": "中国科技创新公司，以高性价比产品著称",
+      "country": "中国",
+      "website": "https://www.mi.com"
+    },
+    {
+      "name": "OPPO",
+      "logo": "https://example.com/oppo-logo.png",
+      "description": "中国智能手机制造商，专注于拍照和充电技术",
+      "country": "中国",
+      "website": "https://www.oppo.com"
+    },
+    {
+      "name": "vivo",
+      "logo": "https://example.com/vivo-logo.png",
+      "description": "中国智能手机品牌，致力于科技创新",
+      "country": "中国",
+      "website": "https://www.vivo.com"
+    },
+    {
+      "name": "一加",
+      "logo": "https://example.com/oneplus-logo.png",
+      "description": "专注于提供高品质智能手机体验的品牌",
+      "country": "中国",
+      "website": "https://www.oneplus.com"
+    },
+    {
+      "name": "魅族",
+      "logo": "https://example.com/meizu-logo.png",
+      "description": "中国智能手机制造商，注重用户体验",
+      "country": "中国",
+      "website": "https://www.meizu.com"
+    },
+    {
+      "name": "荣耀",
+      "logo": "https://example.com/honor-logo.png",
+      "description": "专注于为年轻人打造潮流科技产品",
+      "country": "中国",
+      "website": "https://www.honor.com"
+    },
+    {
+      "name": "realme",
+      "logo": "https://example.com/realme-logo.png",
+      "description": "为年轻人打造的科技潮牌",
+      "country": "中国",
+      "website": "https://www.realme.com"
+    }
+  ],
+  "mobiles": [
+    {
+      "name": "iPhone 17 Pro Max",
+      "brand": "苹果",
+      "model": "A3108",
+      "price": 9999,
+      "releaseDate": "2025-09-13T00:00:00.000Z",
+      "description": "苹果2025年旗舰手机，配备A19芯片，超视网膜XDR显示屏",
+      "specifications": {
+        "display": {
+          "size": "6.8英寸",
+          "resolution": "2796x1290像素",
+          "technology": "OLED",
+          "refreshRate": 120
+        },
+        "processor": {
+          "name": "A19 Bionic",
+          "cores": 6,
+          "speed": "3.5GHz"
+        },
+        "memory": {
+          "ram": "8GB",
+          "storage": "256GB/512GB/1TB/2TB",
+          "expandable": false
+        },
+        "camera": {
+          "main": "4800万像素",
+          "ultrawide": "1200万像素",
+          "telephoto": "1200万像素",
+          "front": "1200万像素"
+        },
+        "battery": {
+          "capacity": "4500mAh",
+          "charging": "27W有线/15W无线",
+          "wirelessCharging": true
+        },
+        "software": {
+          "os": "iOS 19",
+          "version": "19.0"
+        },
+        "connectivity": {
+          "5g": true,
+          "4g": true,
+          "wifi": "Wi-Fi 7",
+          "bluetooth": "Bluetooth 6.0",
+          "nfc": true,
+          "infrared": false
+        },
+        "physical": {
+          "dimensions": "160.7 x 77.6 x 8.3mm",
+          "weight": "224g",
+          "waterproof": "IP68",
+          "material": "玻璃+钛金属"
+        }
+      },
+      "images": [
+        "https://picsum.photos/seed/iphone17promax1/600/400",
+        "https://picsum.photos/seed/iphone17promax2/600/400",
+        "https://picsum.photos/seed/iphone17promax3/600/400"
+      ],
+      "ratings": {
+        "average": 4.8,
+        "count": 5000
+      }
+    },
+    {
+      "name": "三星Galaxy S25 Ultra",
+      "brand": "三星",
+      "model": "SM-S908",
+      "price": 9699,
+      "releaseDate": "2025-02-20T00:00:00.000Z",
+      "description": "三星2025年旗舰手机，配备骁龙8 Gen 4处理器，2K AMOLED显示屏",
+      "specifications": {
+        "display": {
+          "size": "6.8英寸",
+          "resolution": "3200x1440像素",
+          "technology": "Dynamic AMOLED 2X",
+          "refreshRate": 144
+        },
+        "processor": {
+          "name": "骁龙8 Gen 4",
+          "cores": 8,
+          "speed": "3.6GHz"
+        },
+        "memory": {
+          "ram": "12GB/16GB",
+          "storage": "256GB/512GB/1TB",
+          "expandable": true,
+          "maxExpandable": "1TB"
+        },
+        "camera": {
+          "main": "2000万像素",
+          "ultrawide": "1200万像素",
+          "telephoto": "1000万像素",
+          "front": "4000万像素"
+        },
+        "battery": {
+          "capacity": "5000mAh",
+          "charging": "65W有线/15W无线",
+          "wirelessCharging": true
+        },
+        "software": {
+          "os": "Android 15",
+          "version": "One UI 7"
+        },
+        "connectivity": {
+          "5g": true,
+          "4g": true,
+          "wifi": "Wi-Fi 7",
+          "bluetooth": "Bluetooth 6.0",
+          "nfc": true,
+          "infrared": true
+        },
+        "physical": {
+          "dimensions": "163.4 x 79.0 x 8.9mm",
+          "weight": "233g",
+          "waterproof": "IP68",
+          "material": "玻璃+钛金属"
+        }
+      },
+      "images": [
+        "https://picsum.photos/seed/s25ultra1/600/400",
+        "https://picsum.photos/seed/s25ultra2/600/400",
+        "https://picsum.photos/seed/s25ultra3/600/400"
+      ],
+      "ratings": {
+        "average": 4.6,
+        "count": 4200
+      }
+    },
+    {
+      "name": "华为Mate 80 Pro",
+      "brand": "华为",
+      "model": "NOH-AN80",
+      "price": 8999,
+      "releaseDate": "2025-03-15T00:00:00.000Z",
+      "description": "华为2025年旗舰手机，搭载麒麟930芯片，鸿蒙OS 5.0系统",
+      "specifications": {
+        "display": {
+          "size": "6.82英寸",
+          "resolution": "2720x1260像素",
+          "technology": "OLED",
+          "refreshRate": 120
+        },
+        "processor": {
+          "name": "麒麟930",
+          "cores": 8,
+          "speed": "3.3GHz"
+        },
+        "memory": {
+          "ram": "12GB/16GB",
+          "storage": "256GB/512GB/1TB",
+          "expandable": false
+        },
+        "camera": {
+          "main": "5000万像素",
+          "ultrawide": "1300万像素",
+          "telephoto": "1200万像素",
+          "front": "1300万像素"
+        },
+        "battery": {
+          "capacity": "5200mAh",
+          "charging": "100W有线/50W无线",
+          "wirelessCharging": true
+        },
+        "software": {
+          "os": "HarmonyOS",
+          "version": "5.0"
+        },
+        "connectivity": {
+          "5g": true,
+          "4g": true,
+          "wifi": "Wi-Fi 6E",
+          "bluetooth": "Bluetooth 5.3",
+          "nfc": true,
+          "infrared": true
+        },
+        "physical": {
+          "dimensions": "163.6 x 74.5 x 8.5mm",
+          "weight": "225g",
+          "waterproof": "IP68",
+          "material": "玻璃+铝合金"
+        }
+      },
+      "images": [
+        "https://picsum.photos/seed/mate80pro1/600/400",
+        "https://picsum.photos/seed/mate80pro2/600/400",
+        "https://picsum.photos/seed/mate80pro3/600/400"
+      ],
+      "ratings": {
+        "average": 4.7,
+        "count": 3800
+      }
+    },
+    {
+      "name": "小米15 Pro",
+      "brand": "小米",
+      "model": "M2504K10CC",
+      "price": 6499,
+      "releaseDate": "2025-04-10T00:00:00.000Z",
+      "description": "小米2025年旗舰手机，搭载骁龙8 Gen 4处理器，徕卡光学镜头",
+      "specifications": {
+        "display": {
+          "size": "6.73英寸",
+          "resolution": "3200x1440像素",
+          "technology": "AMOLED",
+          "refreshRate": 120
+        },
+        "processor": {
+          "name": "骁龙8 Gen 4",
+          "cores": 8,
+          "speed": "3.6GHz"
+        },
+        "memory": {
+          "ram": "12GB/16GB",
+          "storage": "256GB/512GB/1TB",
+          "expandable": false
+        },
+        "camera": {
+          "main": "5000万像素",
+          "ultrawide": "5000万像素",
+          "telephoto": "5000万像素",
+          "front": "3200万像素"
+        },
+        "battery": {
+          "capacity": "5100mAh",
+          "charging": "120W有线/50W无线",
+          "wirelessCharging": true
+        },
+        "software": {
+          "os": "Android 15",
+          "version": "MIUI 16"
+        },
+        "connectivity": {
+          "5g": true,
+          "4g": true,
+          "wifi": "Wi-Fi 7",
+          "bluetooth": "Bluetooth 6.0",
+          "nfc": true,
+          "infrared": true
+        },
+        "physical": {
+          "dimensions": "162.1 x 75.7 x 8.9mm",
+          "weight": "221g",
+          "waterproof": "IP68",
+          "material": "玻璃+钛合金"
+        }
+      },
+      "images": [
+        "https://picsum.photos/seed/xiaomi15pro1/600/400",
+        "https://picsum.photos/seed/xiaomi15pro2/600/400",
+        "https://picsum.photos/seed/xiaomi15pro3/600/400"
+      ],
+      "ratings": {
+        "average": 4.5,
+        "count": 3500
+      }
+    },
+    {
+      "name": "OPPO Find X7 Ultra",
+      "brand": "OPPO",
+      "model": "PDPM00",
+      "price": 6999,
+      "releaseDate": "2025-01-25T00:00:00.000Z",
+      "description": "OPPO 2025年旗舰手机，骁龙8 Gen 4处理器，哈苏影像系统",
+      "specifications": {
+        "display": {
+          "size": "6.82英寸",
+          "resolution": "3200x1440像素",
+          "technology": "AMOLED",
+          "refreshRate": 144
+        },
+        "processor": {
+          "name": "骁龙8 Gen 4",
+          "cores": 8,
+          "speed": "3.6GHz"
+        },
+        "memory": {
+          "ram": "12GB/16GB",
+          "storage": "256GB/512GB/1TB",
+          "expandable": false
+        },
+        "camera": {
+          "main": "5000万像素",
+          "ultrawide": "5000万像素",
+          "telephoto": "5000万像素",
+          "front": "3200万像素"
+        },
+        "battery": {
+          "capacity": "5000mAh",
+          "charging": "100W有线/50W无线",
+          "wirelessCharging": true
+        },
+        "software": {
+          "os": "Android 15",
+          "version": "ColorOS 15"
+        },
+        "connectivity": {
+          "5g": true,
+          "4g": true,
+          "wifi": "Wi-Fi 7",
+          "bluetooth": "Bluetooth 6.0",
+          "nfc": true,
+          "infrared": false
+        },
+        "physical": {
+          "dimensions": "164.3 x 76.2 x 9.0mm",
+          "weight": "229g",
+          "waterproof": "IP68",
+          "material": "玻璃+铝合金"
+        }
+      },
+      "images": [
+        "https://picsum.photos/seed/findx7ultra1/600/400",
+        "https://picsum.photos/seed/findx7ultra2/600/400",
+        "https://picsum.photos/seed/findx7ultra3/600/400"
+      ],
+      "ratings": {
+        "average": 4.6,
+        "count": 3200
+      }
+    },
+    {
+      "name": "vivo X100 Pro",
+      "brand": "vivo",
+      "model": "V2332A",
+      "price": 6999,
+      "releaseDate": "2025-02-18T00:00:00.000Z",
+      "description": "vivo 2025年旗舰手机，联发科天玑9400处理器，蔡司影像系统",
+      "specifications": {
+        "display": {
+          "size": "6.78英寸",
+          "resolution": "3200x1440像素",
+          "technology": "AMOLED",
+          "refreshRate": 120
+        },
+        "processor": {
+          "name": "天玑9400",
+          "cores": 8,
+          "speed": "3.4GHz"
+        },
+        "memory": {
+          "ram": "12GB/16GB",
+          "storage": "256GB/512GB/1TB",
+          "expandable": false
+        },
+        "camera": {
+          "main": "5000万像素",
+          "ultrawide": "5000万像素",
+          "telephoto": "5000万像素",
+          "front": "3200万像素"
+        },
+        "battery": {
+          "capacity": "5100mAh",
+          "charging": "100W有线/50W无线",
+          "wirelessCharging": true
+        },
+        "software": {
+          "os": "Android 15",
+          "version": "OriginOS 5"
+        },
+        "connectivity": {
+          "5g": true,
+          "4g": true,
+          "wifi": "Wi-Fi 7",
+          "bluetooth": "Bluetooth 6.0",
+          "nfc": true,
+          "infrared": false
+        },
+        "physical": {
+          "dimensions": "164.7 x 75.8 x 8.7mm",
+          "weight": "223g",
+          "waterproof": "IP68",
+          "material": "玻璃+铝合金"
+        }
+      },
+      "images": [
+        "https://picsum.photos/seed/x100pro1/600/400",
+        "https://picsum.photos/seed/x100pro2/600/400",
+        "https://picsum.photos/seed/x100pro3/600/400"
+      ],
+      "ratings": {
+        "average": 4.5,
+        "count": 3000
+      }
+    },
+    {
+      "name": "一加13 Pro",
+      "brand": "一加",
+      "model": "LE2125",
+      "price": 5999,
+      "releaseDate": "2025-03-22T00:00:00.000Z",
+      "description": "一加2025年旗舰手机，骁龙8 Gen 4处理器，哈苏影像系统",
+      "specifications": {
+        "display": {
+          "size": "6.7英寸",
+          "resolution": "3200x1440像素",
+          "technology": "AMOLED",
+          "refreshRate": 120
+        },
+        "processor": {
+          "name": "骁龙8 Gen 4",
+          "cores": 8,
+          "speed": "3.6GHz"
+        },
+        "memory": {
+          "ram": "12GB/16GB",
+          "storage": "256GB/512GB/1TB",
+          "expandable": false
+        },
+        "camera": {
+          "main": "5000万像素",
+          "ultrawide": "5000万像素",
+          "telephoto": "6400万像素",
+          "front": "3200万像素"
+        },
+        "battery": {
+          "capacity": "4900mAh",
+          "charging": "100W有线/50W无线",
+          "wirelessCharging": true
+        },
+        "software": {
+          "os": "Android 15",
+          "version": "OxygenOS 15"
+        },
+        "connectivity": {
+          "5g": true,
+          "4g": true,
+          "wifi": "Wi-Fi 7",
+          "bluetooth": "Bluetooth 6.0",
+          "nfc": true,
+          "infrared": false
+        },
+        "physical": {
+          "dimensions": "163.0 x 74.3 x 8.8mm",
+          "weight": "217g",
+          "waterproof": "IP68",
+          "material": "玻璃+铝合金"
+        }
+      },
+      "images": [
+        "https://picsum.photos/seed/oneplus13pro1/600/400",
+        "https://picsum.photos/seed/oneplus13pro2/600/400",
+        "https://picsum.photos/seed/oneplus13pro3/600/400"
+      ],
+      "ratings": {
+        "average": 4.7,
+        "count": 2800
+      }
+    },
+    {
+      "name": "魅族22 Pro",
+      "brand": "魅族",
+      "model": "M2210",
+      "price": 4999,
+      "releaseDate": "2025-05-05T00:00:00.000Z",
+      "description": "魅族2025年旗舰手机，骁龙8 Gen 4处理器，2K AMOLED显示屏",
+      "specifications": {
+        "display": {
+          "size": "6.67英寸",
+          "resolution": "3200x1440像素",
+          "technology": "AMOLED",
+          "refreshRate": 120
+        },
+        "processor": {
+          "name": "骁龙8 Gen 4",
+          "cores": 8,
+          "speed": "3.6GHz"
+        },
+        "memory": {
+          "ram": "12GB/16GB",
+          "storage": "256GB/512GB",
+          "expandable": false
+        },
+        "camera": {
+          "main": "5000万像素",
+          "ultrawide": "5000万像素",
+          "telephoto": "5000万像素",
+          "front": "3200万像素"
+        },
+        "battery": {
+          "capacity": "4800mAh",
+          "charging": "80W有线/50W无线",
+          "wirelessCharging": true
+        },
+        "software": {
+          "os": "Android 15",
+          "version": "Flyme 11"
+        },
+        "connectivity": {
+          "5g": true,
+          "4g": true,
+          "wifi": "Wi-Fi 7",
+          "bluetooth": "Bluetooth 6.0",
+          "nfc": true,
+          "infrared": false
+        },
+        "physical": {
+          "dimensions": "162.5 x 75.0 x 8.5mm",
+          "weight": "210g",
+          "waterproof": "IP68",
+          "material": "玻璃+铝合金"
+        }
+      },
+      "images": [
+        "https://picsum.photos/seed/meizu22pro1/600/400",
+        "https://picsum.photos/seed/meizu22pro2/600/400",
+        "https://picsum.photos/seed/meizu22pro3/600/400"
+      ],
+      "ratings": {
+        "average": 4.4,
+        "count": 2500
+      }
+    },
+    {
+      "name": "荣耀Magic7 Pro",
+      "brand": "荣耀",
+      "model": "TNA-AN00",
+      "price": 5499,
+      "releaseDate": "2025-01-18T00:00:00.000Z",
+      "description": "荣耀2025年旗舰手机，骁龙8 Gen 4处理器，MagicOS 9.0系统",
+      "specifications": {
+        "display": {
+          "size": "6.81英寸",
+          "resolution": "3200x1440像素",
+          "technology": "AMOLED",
+          "refreshRate": 120
+        },
+        "processor": {
+          "name": "骁龙8 Gen 4",
+          "cores": 8,
+          "speed": "3.6GHz"
+        },
+        "memory": {
+          "ram": "12GB/16GB",
+          "storage": "256GB/512GB/1TB",
+          "expandable": false
+        },
+        "camera": {
+          "main": "5000万像素",
+          "ultrawide": "5000万像素",
+          "telephoto": "5000万像素",
+          "front": "3200万像素"
+        },
+        "battery": {
+          "capacity": "5200mAh",
+          "charging": "66W有线/50W无线",
+          "wirelessCharging": true
+        },
+        "software": {
+          "os": "Android 15",
+          "version": "MagicOS 9.0"
+        },
+        "connectivity": {
+          "5g": true,
+          "4g": true,
+          "wifi": "Wi-Fi 7",
+          "bluetooth": "Bluetooth 6.0",
+          "nfc": true,
+          "infrared": true
+        },
+        "physical": {
+          "dimensions": "164.0 x 75.3 x 8.9mm",
+          "weight": "228g",
+          "waterproof": "IP68",
+          "material": "玻璃+铝合金"
+        }
+      },
+      "images": [
+        "https://picsum.photos/seed/magic7pro1/600/400",
+        "https://picsum.photos/seed/magic7pro2/600/400",
+        "https://picsum.photos/seed/magic7pro3/600/400"
+      ],
+      "ratings": {
+        "average": 4.6,
+        "count": 2700
+      }
+    },
+    {
+      "name": "realme GT6 Pro",
+      "brand": "realme",
+      "model": "RMX3775",
+      "price": 4299,
+      "releaseDate": "2025-04-25T00:00:00.000Z",
+      "description": "realme 2025年旗舰手机，骁龙8 Gen 4处理器，120W快充",
+      "specifications": {
+        "display": {
+          "size": "6.7英寸",
+          "resolution": "2780x1224像素",
+          "technology": "AMOLED",
+          "refreshRate": 120
+        },
+        "processor": {
+          "name": "骁龙8 Gen 4",
+          "cores": 8,
+          "speed": "3.6GHz"
+        },
+        "memory": {
+          "ram": "12GB/16GB",
+          "storage": "256GB/512GB",
+          "expandable": false
+        },
+        "camera": {
+          "main": "5000万像素",
+          "ultrawide": "5000万像素",
+          "telephoto": "3200万像素",
+          "front": "3200万像素"
+        },
+        "battery": {
+          "capacity": "5000mAh",
+          "charging": "120W有线/30W无线",
+          "wirelessCharging": true
+        },
+        "software": {
+          "os": "Android 15",
+          "version": "realme UI 5.0"
+        },
+        "connectivity": {
+          "5g": true,
+          "4g": true,
+          "wifi": "Wi-Fi 7",
+          "bluetooth": "Bluetooth 6.0",
+          "nfc": true,
+          "infrared": false
+        },
+        "physical": {
+          "dimensions": "161.5 x 74.5 x 8.7mm",
+          "weight": "215g",
+          "waterproof": "IP67",
+          "material": "玻璃+铝合金"
+        }
+      },
+      "images": [
+        "https://picsum.photos/seed/gt6pro1/600/400",
+        "https://picsum.photos/seed/gt6pro2/600/400",
+        "https://picsum.photos/seed/gt6pro3/600/400"
+      ],
+      "ratings": {
+        "average": 4.4,
+        "count": 2300
+      }
+    }
+  ]
+}

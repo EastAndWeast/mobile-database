@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手机对比 - 手机参数数据库</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#F59E0B',
+                        dark: '#1F2937',
+                        light: '#F9FAFB'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .compare-table {
+                display: grid;
+                grid-template-columns: 200px 1fr 1fr 1fr;
+                gap: 1px;
+                background-color: #e5e7eb;
+            }
+            @media (max-width: 768px) {
+                .compare-table {
+                    grid-template-columns: 120px 1fr 1fr;
+                }
+                .compare-table .third-phone {
+                    display: none;
+                }
+            }
+            .compare-cell {
+                background-color: white;
+                padding: 1rem;
+                display: flex;
+                align-items: center;
+            }
+            .compare-header {
+                background-color: #f9fafb;
+                font-weight: 600;
+            }
+            .better-spec {
+                background-color: #dcfce7;
+                color: #166534;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-dark font-sans">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <i class="fas fa-mobile-alt text-2xl text-primary"></i>
+                    <h1 class="text-xl font-bold text-primary">手机参数数据库</h1>
+                </a>
+            </div>
+            
+            <!-- 面包屑导航 -->
+            <nav class="hidden md:flex items-center space-x-2 text-sm text-gray-600">
+                <a href="index.html" class="hover:text-primary">首页</a>
+                <i class="fas fa-chevron-right text-xs"></i>
+                <span class="text-primary font-medium">手机对比</span>
+            </nav>
+            
+            <!-- 返回按钮 -->
+            <button onclick="history.back()" class="flex items-center space-x-1 text-gray-600 hover:text-primary transition-colors">
+                <i class="fas fa-arrow-left"></i>
+                <span class="hidden md:inline">返回</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- 页面标题 -->
+        <section class="text-center mb-8">
+            <h1 class="text-3xl font-bold mb-4">手机参数对比</h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                全面对比不同手机的详细参数，帮助您做出最明智的购买决策。支持同时对比最多3款手机。
+            </p>
+        </section>
+
+        <!-- 手机选择器 -->
+        <section class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <h2 class="text-xl font-bold mb-4">选择对比手机</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- 第一部手机 -->
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                    <div class="phone-selected">
+                        <img src="https://picsum.photos/seed/iphone14pro-compare/200/300" alt="iPhone 14 Pro" class="w-24 h-36 object-cover mx-auto mb-3 rounded-lg">
+                        <h3 class="font-bold">iPhone 14 Pro</h3>
+                        <p class="text-sm text-gray-600">苹果 | ¥7,999起</p>
+                        <button class="mt-2 text-red-500 hover:text-red-700 text-sm">
+                            <i class="fas fa-times mr-1"></i>移除
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 第二部手机 -->
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                    <div class="phone-selected">
+                        <img src="https://picsum.photos/seed/s23ultra-compare/200/300" alt="三星 Galaxy S23 Ultra" class="w-24 h-36 object-cover mx-auto mb-3 rounded-lg">
+                        <h3 class="font-bold">三星 Galaxy S23 Ultra</h3>
+                        <p class="text-sm text-gray-600">三星 | ¥8,999起</p>
+                        <button class="mt-2 text-red-500 hover:text-red-700 text-sm">
+                            <i class="fas fa-times mr-1"></i>移除
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 第三部手机 -->
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center third-phone">
+                    <div class="phone-selected">
+                        <img src="https://picsum.photos/seed/p60pro-compare/200/300" alt="华为 P60 Pro" class="w-24 h-36 object-cover mx-auto mb-3 rounded-lg">
+                        <h3 class="font-bold">华为 P60 Pro</h3>
+                        <p class="text-sm text-gray-600">华为 | ¥6,988起</p>
+                        <button class="mt-2 text-red-500 hover:text-red-700 text-sm">
+                            <i class="fas fa-times mr-1"></i>移除
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 对比结果 -->
+        <section class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xl font-bold">详细对比</h2>
+                    <div class="flex space-x-2">
+                        <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors text-sm">
+                            <i class="fas fa-download mr-1"></i>导出对比
+                        </button>
+                        <button class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-sm">
+                            <i class="fas fa-share-alt mr-1"></i>分享对比
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 对比表格 -->
+            <div class="compare-table">
+                <!-- 表头 -->
+                <div class="compare-cell compare-header">参数项目</div>
+                <div class="compare-cell compare-header">
+                    <div class="text-center w-full">
+                        <div class="font-bold">iPhone 14 Pro</div>
+                        <div class="text-sm text-gray-600">苹果</div>
+                    </div>
+                </div>
+                <div class="compare-cell compare-header">
+                    <div class="text-center w-full">
+                        <div class="font-bold">Galaxy S23 Ultra</div>
+                        <div class="text-sm text-gray-600">三星</div>
+                    </div>
+                </div>
+                <div class="compare-cell compare-header third-phone">
+                    <div class="text-center w-full">
+                        <div class="font-bold">华为 P60 Pro</div>
+                        <div class="text-sm text-gray-600">华为</div>
+                    </div>
+                </div>
+
+                <!-- 基本信息 -->
+                <div class="compare-cell font-medium bg-gray-50">价格</div>
+                <div class="compare-cell">¥7,999起</div>
+                <div class="compare-cell better-spec">¥8,999起</div>
+                <div class="compare-cell third-phone">¥6,988起</div>
+
+                <div class="compare-cell font-medium bg-gray-50">发布时间</div>
+                <div class="compare-cell">2022年9月</div>
+                <div class="compare-cell">2023年2月</div>
+                <div class="compare-cell third-phone">2023年3月</div>
+
+                <div class="compare-cell font-medium bg-gray-50">操作系统</div>
+                <div class="compare-cell">iOS 16</div>
+                <div class="compare-cell">Android 13</div>
+                <div class="compare-cell third-phone">HarmonyOS 3.1</div>
+
+                <!-- 屏幕显示 -->
+                <div class="compare-cell font-medium bg-gray-50">屏幕尺寸</div>
+                <div class="compare-cell">6.1英寸</div>
+                <div class="compare-cell better-spec">6.8英寸</div>
+                <div class="compare-cell third-phone">6.67英寸</div>
+
+                <div class="compare-cell font-medium bg-gray-50">屏幕类型</div>
+                <div class="compare-cell">Super Retina XDR OLED</div>
+                <div class="compare-cell">Dynamic AMOLED 2X</div>
+                <div class="compare-cell third-phone">OLED曲面屏</div>
+
+                <div class="compare-cell font-medium bg-gray-50">分辨率</div>
+                <div class="compare-cell">2556×1179</div>
+                <div class="compare-cell better-spec">3088×1440</div>
+                <div class="compare-cell third-phone">2700×1220</div>
+
+                <div class="compare-cell font-medium bg-gray-50">刷新率</div>
+                <div class="compare-cell better-spec">120Hz</div>
+                <div class="compare-cell better-spec">120Hz</div>
+                <div class="compare-cell third-phone better-spec">120Hz</div>
+
+                <!-- 性能配置 -->
+                <div class="compare-cell font-medium bg-gray-50">处理器</div>
+                <div class="compare-cell">A16 仿生芯片</div>
+                <div class="compare-cell">骁龙 8 Gen 2</div>
+                <div class="compare-cell third-phone">骁龙 8+ Gen 1</div>
+
+                <div class="compare-cell font-medium bg-gray-50">内存</div>
+                <div class="compare-cell">6GB</div>
+                <div class="compare-cell better-spec">12GB</div>
+                <div class="compare-cell third-phone">8GB</div>
+
+                <div class="compare-cell font-medium bg-gray-50">存储</div>
+                <div class="compare-cell">128GB/256GB/512GB/1TB</div>
+                <div class="compare-cell">256GB/512GB/1TB</div>
+                <div class="compare-cell third-phone">256GB/512GB</div>
+
+                <!-- 拍照功能 -->
+                <div class="compare-cell font-medium bg-gray-50">主摄像头</div>
+                <div class="compare-cell">4800万像素</div>
+                <div class="compare-cell better-spec">2亿像素</div>
+                <div class="compare-cell third-phone">5000万像素</div>
+
+                <div class="compare-cell font-medium bg-gray-50">超广角</div>
+                <div class="compare-cell">1200万像素</div>
+                <div class="compare-cell">1200万像素</div>
+                <div class="compare-cell third-phone">1300万像素</div>
+
+                <div class="compare-cell font-medium bg-gray-50">长焦</div>
+                <div class="compare-cell">1200万像素 3倍</div>
+                <div class="compare-cell better-spec">1000万像素 3倍 + 1000万像素 10倍</div>
+                <div class="compare-cell third-phone">1200万像素 3.5倍</div>
+
+                <div class="compare-cell font-medium bg-gray-50">前置摄像头</div>
+                <div class="compare-cell">1200万像素</div>
+                <div class="compare-cell">1200万像素</div>
+                <div class="compare-cell third-phone">1300万像素</div>
+
+                <!-- 续航充电 -->
+                <div class="compare-cell font-medium bg-gray-50">电池容量</div>
+                <div class="compare-cell">3200mAh</div>
+                <div class="compare-cell better-spec">5000mAh</div>
+                <div class="compare-cell third-phone">4815mAh</div>
+
+                <div class="compare-cell font-medium bg-gray-50">有线充电</div>
+                <div class="compare-cell">20W</div>
+                <div class="compare-cell">45W</div>
+                <div class="compare-cell third-phone better-spec">88W</div>
+
+                <div class="compare-cell font-medium bg-gray-50">无线充电</div>
+                <div class="compare-cell">15W MagSafe</div>
+                <div class="compare-cell">15W</div>
+                <div class="compare-cell third-phone better-spec">50W</div>
+
+                <!-- 其他特性 -->
+                <div class="compare-cell font-medium bg-gray-50">机身重量</div>
+                <div class="compare-cell">206g</div>
+                <div class="compare-cell">234g</div>
+                <div class="compare-cell third-phone better-spec">200g</div>
+
+                <div class="compare-cell font-medium bg-gray-50">防水等级</div>
+                <div class="compare-cell better-spec">IP68</div>
+                <div class="compare-cell better-spec">IP68</div>
+                <div class="compare-cell third-phone better-spec">IP68</div>
+
+                <div class="compare-cell font-medium bg-gray-50">5G支持</div>
+                <div class="compare-cell better-spec">支持</div>
+                <div class="compare-cell better-spec">支持</div>
+                <div class="compare-cell third-phone better-spec">支持</div>
+            </div>
+        </section>
+
+        <!-- 购买建议 -->
+        <section class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center mb-4">
+                    <img src="https://picsum.photos/seed/iphone14pro-rec/100/100" alt="iPhone 14 Pro" class="w-12 h-12 object-cover rounded-lg mr-3">
+                    <div>
+                        <h3 class="font-bold">iPhone 14 Pro</h3>
+                        <p class="text-sm text-gray-600">综合评分: 4.6/5</p>
+                    </div>
+                </div>
+                <div class="space-y-2 text-sm">
+                    <div class="flex items-center text-green-600">
+                        <i class="fas fa-plus-circle mr-2"></i>
+                        <span>iOS生态体验优秀</span>
+                    </div>
+                    <div class="flex items-center text-green-600">
+                        <i class="fas fa-plus-circle mr-2"></i>
+                        <span>A16芯片性能强劲</span>
+                    </div>
+                    <div class="flex items-center text-red-600">
+                        <i class="fas fa-minus-circle mr-2"></i>
+                        <span>电池容量相对较小</span>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-blue-800">
+                        <strong>推荐理由：</strong>适合iOS用户升级，拍照和性能表现均衡。
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center mb-4">
+                    <img src="https://picsum.photos/seed/s23ultra-rec/100/100" alt="Galaxy S23 Ultra" class="w-12 h-12 object-cover rounded-lg mr-3">
+                    <div>
+                        <h3 class="font-bold">Galaxy S23 Ultra</h3>
+                        <p class="text-sm text-gray-600">综合评分: 4.7/5</p>
+                    </div>
+                </div>
+                <div class="space-y-2 text-sm">
+                    <div class="flex items-center text-green-600">
+                        <i class="fas fa-plus-circle mr-2"></i>
+                        <span>2亿像素主摄拍照出色</span>
+                    </div>
+                    <div class="flex items-center text-green-600">
+                        <i class="fas fa-plus-circle mr-2"></i>
+                        <span>大屏幕显示效果佳</span>
+                    </div>
+                    <div class="flex items-center text-red-600">
+                        <i class="fas fa-minus-circle mr-2"></i>
+                        <span>价格相对较高</span>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                    <p class="text-sm text-green-800">
+                        <strong>推荐理由：</strong>追求极致拍照和大屏体验的用户首选。
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md p-6 third-phone">
+                <div class="flex items-center mb-4">
+                    <img src="https://picsum.photos/seed/p60pro-rec/100/100" alt="华为 P60 Pro" class="w-12 h-12 object-cover rounded-lg mr-3">
+                    <div>
+                        <h3 class="font-bold">华为 P60 Pro</h3>
+                        <p class="text-sm text-gray-600">综合评分: 4.4/5</p>
+                    </div>
+                </div>
+                <div class="space-y-2 text-sm">
+                    <div class="flex items-center text-green-600">
+                        <i class="fas fa-plus-circle mr-2"></i>
+                        <span>88W快充速度极快</span>
+                    </div>
+                    <div class="flex items-center text-green-600">
+                        <i class="fas fa-plus-circle mr-2"></i>
+                        <span>性价比相对较高</span>
+                    </div>
+                    <div class="flex items-center text-red-600">
+                        <i class="fas fa-minus-circle mr-2"></i>
+                        <span>应用生态相对有限</span>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                    <p class="text-sm text-yellow-800">
+                        <strong>推荐理由：</strong>注重快充和性价比的用户可以考虑。
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 移除手机功能
+        document.querySelectorAll('.fa-times').forEach(button => {
+            button.addEventListener('click', function() {
+                // 这里可以添加移除手机的逻辑
+                console.log('移除手机');
+            });
+        });
+
+        // 导出对比功能
+        document.querySelector('.fa-download').addEventListener('click', function() {
+            // 这里可以添加导出功能
+            console.log('导出对比结果');
+        });
+
+        // 分享对比功能
+        document.querySelector('.fa-share-alt').addEventListener('click', function() {
+            // 这里可以添加分享功能
+            console.log('分享对比结果');
+        });
+    </script>
+</body>
+</html>

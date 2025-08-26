@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone 14 Pro 详细参数 - 手机参数数据库</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#F59E0B',
+                        dark: '#1F2937',
+                        light: '#F9FAFB'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            }
+            .spec-grid {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                gap: 1rem;
+                align-items: center;
+            }
+            @media (max-width: 768px) {
+                .spec-grid {
+                    grid-template-columns: 1fr;
+                    gap: 0.5rem;
+                }
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-dark font-sans">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <i class="fas fa-mobile-alt text-2xl text-primary"></i>
+                    <h1 class="text-xl font-bold text-primary">手机参数数据库</h1>
+                </a>
+            </div>
+            
+            <!-- 面包屑导航 -->
+            <nav class="hidden md:flex items-center space-x-2 text-sm text-gray-600">
+                <a href="index.html" class="hover:text-primary">首页</a>
+                <i class="fas fa-chevron-right text-xs"></i>
+                <a href="brand.html?brand=apple" class="hover:text-primary">苹果</a>
+                <i class="fas fa-chevron-right text-xs"></i>
+                <span class="text-primary font-medium">iPhone 14 Pro</span>
+            </nav>
+            
+            <!-- 返回按钮 -->
+            <button onclick="history.back()" class="flex items-center space-x-1 text-gray-600 hover:text-primary transition-colors">
+                <i class="fas fa-arrow-left"></i>
+                <span class="hidden md:inline">返回</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- 手机基本信息 -->
+        <section class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
+                <!-- 手机图片 -->
+                <div class="flex justify-center">
+                    <div class="relative">
+                        <img src="https://picsum.photos/seed/iphone14pro/400/600" alt="iPhone 14 Pro" class="rounded-lg shadow-lg max-w-full h-auto">
+                        <div class="absolute top-4 left-4 bg-accent text-white text-sm font-bold px-3 py-1 rounded-full">
+                            新品
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 基本信息 -->
+                <div class="space-y-6">
+                    <div>
+                        <h1 class="text-3xl font-bold mb-2">iPhone 14 Pro</h1>
+                        <p class="text-gray-600 text-lg">苹果 | iOS 16 | 2022年9月发布</p>
+                    </div>
+                    
+                    <!-- 价格信息 -->
+                    <div class="bg-gradient-to-r from-primary/10 to-blue-100 p-4 rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-2xl font-bold text-primary">¥7,999起</span>
+                            <div class="flex items-center text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="text-gray-600 text-sm ml-1">(4.6分 · 1,284条评价)</span>
+                            </div>
+                        </div>
+                        <div class="text-sm text-gray-600">
+                            <span class="line-through">原价：¥8,999</span>
+                            <span class="text-secondary font-medium ml-2">限时优惠</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 核心亮点 -->
+                    <div>
+                        <h3 class="text-lg font-bold mb-3">核心亮点</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
+                                <i class="fas fa-microchip text-primary"></i>
+                                <span class="text-sm">A16仿生芯片</span>
+                            </div>
+                            <div class="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
+                                <i class="fas fa-camera text-primary"></i>
+                                <span class="text-sm">4800万主摄</span>
+                            </div>
+                            <div class="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
+                                <i class="fas fa-mobile-screen text-primary"></i>
+                                <span class="text-sm">6.1英寸屏幕</span>
+                            </div>
+                            <div class="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
+                                <i class="fas fa-battery-full text-primary"></i>
+                                <span class="text-sm">全天续航</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 操作按钮 -->
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <button class="flex-1 bg-primary text-white font-medium py-3 px-6 rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center space-x-2">
+                            <i class="fas fa-balance-scale"></i>
+                            <span>加入对比</span>
+                        </button>
+                        <button class="flex-1 bg-secondary text-white font-medium py-3 px-6 rounded-lg hover:bg-green-600 transition-colors flex items-center justify-center space-x-2">
+                            <i class="fas fa-heart"></i>
+                            <span>收藏</span>
+                        </button>
+                        <button class="flex-1 bg-accent text-white font-medium py-3 px-6 rounded-lg hover:bg-yellow-500 transition-colors flex items-center justify-center space-x-2">
+                            <i class="fas fa-share-alt"></i>
+                            <span>分享</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 详细参数 -->
+        <section class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-list-ul text-primary mr-2"></i>
+                详细参数
+            </h2>
+            
+            <!-- 参数标签页 -->
+            <div class="flex flex-wrap border-b border-gray-200 mb-6">
+                <button class="tab-button active px-4 py-2 font-medium text-primary border-b-2 border-primary" data-tab="basic">
+                    基本信息
+                </button>
+                <button class="tab-button px-4 py-2 font-medium text-gray-600 hover:text-primary" data-tab="display">
+                    屏幕显示
+                </button>
+                <button class="tab-button px-4 py-2 font-medium text-gray-600 hover:text-primary" data-tab="performance">
+                    性能配置
+                </button>
+                <button class="tab-button px-4 py-2 font-medium text-gray-600 hover:text-primary" data-tab="camera">
+                    拍照功能
+                </button>
+                <button class="tab-button px-4 py-2 font-medium text-gray-600 hover:text-primary" data-tab="battery">
+                    续航充电
+                </button>
+            </div>
+            
+            <!-- 基本信息标签页 -->
+            <div class="tab-content active" id="basic">
+                <div class="space-y-4">
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">品牌</span>
+                        <span>苹果 (Apple)</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">型号</span>
+                        <span>iPhone 14 Pro</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">发布时间</span>
+                        <span>2022年9月</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">操作系统</span>
+                        <span>iOS 16</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">机身尺寸</span>
+                        <span>147.5×71.5×7.85mm</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">机身重量</span>
+                        <span>206g</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">机身材质</span>
+                        <span>不锈钢边框 + 玻璃后盖</span>
+                    </div>
+                    <div class="spec-grid py-3">
+                        <span class="font-medium text-gray-700">防水等级</span>
+                        <span>IP68 (水深6米最长可达30分钟)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 屏幕显示标签页 -->
+            <div class="tab-content hidden" id="display">
+                <div class="space-y-4">
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">屏幕尺寸</span>
+                        <span>6.1英寸</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">屏幕类型</span>
+                        <span>Super Retina XDR OLED</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">分辨率</span>
+                        <span>2556×1179像素，460ppi</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">刷新率</span>
+                        <span>ProMotion 自适应刷新率，最高120Hz</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">亮度</span>
+                        <span>1000尼特 (典型)，1600尼特 (HDR)</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">对比度</span>
+                        <span>2,000,000:1</span>
+                    </div>
+                    <div class="spec-grid py-3">
+                        <span class="font-medium text-gray-700">屏幕特性</span>
+                        <span>HDR10、杜比视界、True Tone、广色域P3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 性能配置标签页 -->
+            <div class="tab-content hidden" id="performance">
+                <div class="space-y-4">
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">处理器</span>
+                        <span>A16 仿生芯片</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">CPU</span>
+                        <span>6核CPU (2个性能核心+4个能效核心)</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">GPU</span>
+                        <span>5核GPU</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">神经网络引擎</span>
+                        <span>16核神经网络引擎</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">内存</span>
+                        <span>6GB LPDDR5</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">存储容量</span>
+                        <span>128GB / 256GB / 512GB / 1TB</span>
+                    </div>
+                    <div class="spec-grid py-3">
+                        <span class="font-medium text-gray-700">制程工艺</span>
+                        <span>4nm工艺</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 拍照功能标签页 -->
+            <div class="tab-content hidden" id="camera">
+                <div class="space-y-4">
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">后置摄像头</span>
+                        <span>三摄系统</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">主摄</span>
+                        <span>4800万像素，f/1.78光圈，传感器位移式光学图像防抖</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">超广角</span>
+                        <span>1200万像素，f/2.2光圈，120°视角</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">长焦</span>
+                        <span>1200万像素，f/2.8光圈，3倍光学变焦</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">前置摄像头</span>
+                        <span>1200万像素，f/1.9光圈，自动对焦</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">视频录制</span>
+                        <span>4K@60fps，杜比视界HDR录制</span>
+                    </div>
+                    <div class="spec-grid py-3">
+                        <span class="font-medium text-gray-700">拍照特性</span>
+                        <span>夜间模式、深度融合、智能HDR 4、人像模式</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 续航充电标签页 -->
+            <div class="tab-content hidden" id="battery">
+                <div class="space-y-4">
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">电池容量</span>
+                        <span>3200mAh (典型值)</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">视频播放</span>
+                        <span>最长可达23小时</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">音频播放</span>
+                        <span>最长可达75小时</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">有线充电</span>
+                        <span>支持20W快速充电，30分钟最多可充至50%</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">无线充电</span>
+                        <span>支持15W MagSafe无线充电</span>
+                    </div>
+                    <div class="spec-grid py-3 border-b border-gray-100">
+                        <span class="font-medium text-gray-700">Qi无线充电</span>
+                        <span>支持7.5W Qi无线充电</span>
+                    </div>
+                    <div class="spec-grid py-3">
+                        <span class="font-medium text-gray-700">充电接口</span>
+                        <span>Lightning接口</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 用户评价区域 -->
+        <section class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-star text-primary mr-2"></i>
+                用户评价
+            </h2>
+
+            <!-- 评分概览 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-primary mb-2">4.6</div>
+                    <div class="flex justify-center items-center text-yellow-400 mb-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="text-gray-600">基于1,284条评价</div>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="flex items-center">
+                        <span class="text-sm w-8">5星</span>
+                        <div class="flex-1 bg-gray-200 rounded-full h-2 mx-2">
+                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 68%"></div>
+                        </div>
+                        <span class="text-sm text-gray-600">68%</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-sm w-8">4星</span>
+                        <div class="flex-1 bg-gray-200 rounded-full h-2 mx-2">
+                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 22%"></div>
+                        </div>
+                        <span class="text-sm text-gray-600">22%</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-sm w-8">3星</span>
+                        <div class="flex-1 bg-gray-200 rounded-full h-2 mx-2">
+                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 7%"></div>
+                        </div>
+                        <span class="text-sm text-gray-600">7%</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-sm w-8">2星</span>
+                        <div class="flex-1 bg-gray-200 rounded-full h-2 mx-2">
+                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 2%"></div>
+                        </div>
+                        <span class="text-sm text-gray-600">2%</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-sm w-8">1星</span>
+                        <div class="flex-1 bg-gray-200 rounded-full h-2 mx-2">
+                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 1%"></div>
+                        </div>
+                        <span class="text-sm text-gray-600">1%</span>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="flex justify-between">
+                        <span class="text-sm text-gray-600">性能表现</span>
+                        <span class="text-sm font-medium">4.8分</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-sm text-gray-600">拍照效果</span>
+                        <span class="text-sm font-medium">4.7分</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-sm text-gray-600">续航能力</span>
+                        <span class="text-sm font-medium">4.3分</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-sm text-gray-600">外观设计</span>
+                        <span class="text-sm font-medium">4.9分</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-sm text-gray-600">性价比</span>
+                        <span class="text-sm font-medium">4.1分</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 标签页切换功能
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                
+                // 移除所有活动状态
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active', 'text-primary', 'border-primary');
+                    btn.classList.add('text-gray-600');
+                });
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('active');
+                });
+                
+                // 添加当前活动状态
+                this.classList.add('active', 'text-primary', 'border-primary');
+                this.classList.remove('text-gray-600');
+                document.getElementById(tabId).classList.remove('hidden');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

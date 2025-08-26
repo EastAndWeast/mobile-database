@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手机参数数据库 - 专业的手机参数查询平台</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind CSS v3 配置
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#F59E0B',
+                        dark: '#1F2937',
+                        light: '#F9FAFB'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-dark font-sans">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white shadow-md transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-mobile-alt text-2xl text-primary"></i>
+                <h1 class="text-xl font-bold text-primary">手机参数数据库</h1>
+            </div>
+            
+            <!-- 搜索框 - 桌面版 -->
+            <div class="hidden md:flex items-center flex-1 max-w-xl mx-8">
+                <div class="relative w-full">
+                    <input
+                        type="text"
+                        placeholder="搜索手机型号、品牌或参数..."
+                        class="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    >
+                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 导航菜单 -->
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#featured" class="text-gray-600 hover:text-primary transition-colors">热门机型</a>
+                <a href="#brands" class="text-gray-600 hover:text-primary transition-colors">品牌大全</a>
+                <a href="#compare" class="text-gray-600 hover:text-primary transition-colors">参数对比</a>
+                <a href="#news" class="text-gray-600 hover:text-primary transition-colors">行业资讯</a>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-gray-600 hover:text-primary" id="mobile-menu-button">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端搜索框 -->
+        <div class="md:hidden px-4 pb-3">
+            <div class="relative w-full">
+                <input
+                    type="text"
+                    placeholder="搜索手机型号、品牌或参数..."
+                    class="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                >
+                <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div class="md:hidden hidden bg-white border-t border-gray-200" id="mobile-menu">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#featured" class="text-gray-600 hover:text-primary py-2 transition-colors">热门机型</a>
+                <a href="#brands" class="text-gray-600 hover:text-primary py-2 transition-colors">品牌大全</a>
+                <a href="#compare" class="text-gray-600 hover:text-primary py-2 transition-colors">参数对比</a>
+                <a href="#news" class="text-gray-600 hover:text-primary py-2 transition-colors">行业资讯</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 英雄区域 -->
+        <section class="bg-gradient-to-r from-primary to-blue-700 text-white py-12 md:py-20">
+            <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold leading-tight text-shadow mb-4">
+                        精准掌握每一款手机的<span class="text-accent">核心参数</span>
+                    </h2>
+                    <p class="text-lg md:text-xl mb-8 text-blue-100 max-w-lg">
+                        提供最新、最全面的手机参数数据库，帮助您在购买手机时做出明智决策。
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#search" class="bg-white text-primary font-medium px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors shadow-lg">
+                            立即搜索
+                        </a>
+                        <a href="#compare" class="bg-transparent border-2 border-white text-white font-medium px-6 py-3 rounded-lg hover:bg-white/10 transition-colors">
+                            对比机型
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-5/12 relative">
+                    <img src="https://picsum.photos/seed/phone1/600/400" alt="最新款智能手机" class="rounded-lg shadow-2xl mx-auto max-w-full h-auto">
+                    <div class="absolute -bottom-6 -right-6 bg-accent text-white p-4 rounded-lg shadow-lg hidden md:block">
+                        <p class="font-bold text-lg">实时更新</p>
+                        <p>每日更新手机数据</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 高级搜索区域 -->
+        <section id="search" class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-8 text-center">高级搜索</h2>
+                <div class="bg-gray-50 rounded-xl p-6 shadow-md">
+                    <form class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="col-span-1 md:col-span-3 flex flex-wrap gap-4">
+                            <div class="flex-1 min-w-[200px]">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">品牌</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">全部品牌</option>
+                                    <option value="apple">苹果</option>
+                                    <option value="samsung">三星</option>
+                                    <option value="huawei">华为</option>
+                                    <option value="xiaomi">小米</option>
+                                    <option value="oppo">OPPO</option>
+                                    <option value="vivo">vivo</option>
+                                    <option value="oneplus">一加</option>
+                                    <!-- 更多品牌选项 -->
+                                </select>
+                            </div>
+                            <div class="flex-1 min-w-[200px]">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">价格区间</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">全部价格</option>
+                                    <option value="0-1000">1000元以下</option>
+                                    <option value="1000-2000">1000-2000元</option>
+                                    <option value="2000-3000">2000-3000元</option>
+                                    <option value="3000-5000">3000-5000元</option>
+                                    <option value="5000+">5000元以上</option>
+                                </select>
+                            </div>
+                            <div class="flex-1 min-w-[200px]">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">屏幕尺寸</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">全部尺寸</option>
+                                    <option value="small">5.5英寸以下</option>
+                                    <option value="medium">5.5-6.5英寸</option>
+                                    <option value="large">6.5英寸以上</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-span-1 md:col-span-3 flex flex-wrap gap-4">
+                            <div class="flex-1 min-w-[200px]">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">处理器</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">全部处理器</option>
+                                    <option value="snapdragon">骁龙</option>
+                                    <option value="exynos">Exynos</option>
+                                    <option value="kirin">麒麟</option>
+                                    <option value="apple">苹果A系列</option>
+                                    <option value="mediatek">联发科</option>
+                                </select>
+                            </div>
+                            <div class="flex-1 min-w-[200px]">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">内存</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">全部内存</option>
+                                    <option value="4gb">4GB</option>
+                                    <option value="6gb">6GB</option>
+                                    <option value="8gb">8GB</option>
+                                    <option value="12gb+">12GB及以上</option>
+                                </select>
+                            </div>
+                            <div class="flex-1 min-w-[200px]">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">存储容量</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">全部容量</option>
+                                    <option value="64gb">64GB</option>
+                                    <option value="128gb">128GB</option>
+                                    <option value="256gb">256GB</option>
+                                    <option value="512gb+">512GB及以上</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-span-1 md:col-span-3 flex justify-center mt-4">
+                            <button type="button" class="bg-primary text-white font-medium px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors shadow-md flex items-center space-x-2">
+                                <i class="fas fa-search"></i>
+                                <span>搜索手机</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 热门机型区域 -->
+        <section id="featured" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-10">
+                    <h2 class="text-3xl font-bold">热门机型</h2>
+                    <a href="#" class="text-primary hover:text-blue-600 font-medium flex items-center space-x-1">
+                        <span>查看全部</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- 手机卡片 1 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                        <div class="relative h-56 overflow-hidden bg-gray-100">
+                            <img src="https://picsum.photos/seed/phone2/400/300" alt="iPhone 14 Pro" class="w-full h-full object-cover transform transition-transform hover:scale-105">
+                            <div class="absolute top-3 left-3 bg-accent text-white text-xs font-bold px-2 py-1 rounded">新品</div>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-1">iPhone 14 Pro</h3>
+                            <p class="text-gray-500 text-sm mb-3">苹果 | iOS 16</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-primary font-bold text-xl">¥7,999起</span>
+                                <div class="flex items-center text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="text-gray-600 text-sm ml-1">(128)</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-sm text-gray-600 mb-4">
+                                <div class="flex items-center"><i class="fas fa-memory text-primary mr-1"></i> 12GB RAM</div>
+                                <div class="flex items-center"><i class="fas fa-hdd text-primary mr-1"></i> 256GB ROM</div>
+                                <div class="flex items-center"><i class="fas fa-camera text-primary mr-1"></i> 4800万像素</div>
+                                <div class="flex items-center"><i class="fas fa-battery-full text-primary mr-1"></i> 4323mAh</div>
+                            </div>
+                            <a href="#" class="block w-full text-center bg-primary text-white font-medium py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                                查看详情
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 手机卡片 2 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                        <div class="relative h-56 overflow-hidden bg-gray-100">
+                            <img src="https://picsum.photos/seed/phone3/400/300" alt="三星 Galaxy S23 Ultra" class="w-full h-full object-cover transform transition-transform hover:scale-105">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-1">三星 Galaxy S23 Ultra</h3>
+                            <p class="text-gray-500 text-sm mb-3">三星 | Android 13</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-primary font-bold text-xl">¥8,999起</span>
+                                <div class="flex items-center text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="text-gray-600 text-sm ml-1">(96)</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-sm text-gray-600 mb-4">
+                                <div class="flex items-center"><i class="fas fa-memory text-primary mr-1"></i> 12GB RAM</div>
+                                <div class="flex items-center"><i class="fas fa-hdd text-primary mr-1"></i> 256GB ROM</div>
+                                <div class="flex items-center"><i class="fas fa-camera text-primary mr-1"></i> 2亿像素</div>
+                                <div class="flex items-center"><i class="fas fa-battery-full text-primary mr-1"></i> 5000mAh</div>
+                            </div>
+                            <a href="#" class="block w-full text-center bg-primary text-white font-medium py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                                查看详情
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 手机卡片 3 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                        <div class="relative h-56 overflow-hidden bg-gray-100">
+                            <img src="https://picsum.photos/seed/phone4/400/300" alt="华为 P60 Pro" class="w-full h-full object-cover transform transition-transform hover:scale-105">
+                            <div class="absolute top-3 left-3 bg-secondary text-white text-xs font-bold px-2 py-1 rounded">畅销</div>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-1">华为 P60 Pro</h3>
+                            <p class="text-gray-500 text-sm mb-3">华为 | HarmonyOS 3.1</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-primary font-bold text-xl">¥6,988起</span>
+                                <div class="flex items-center text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <span class="text-gray-600 text-sm ml-1">(75)</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-sm text-gray-600 mb-4">
+                                <div class="flex items-center"><i class="fas fa-memory text-primary mr-1"></i> 8GB RAM</div>
+                                <div class="flex items-center"><i class="fas fa-hdd text-primary mr-1"></i> 256GB ROM</div>
+                                <div class="flex items-center"><i class="fas fa-camera text-primary mr-1"></i> 5000万像素</div>
+                                <div class="flex items-center"><i class="fas fa-battery-full text-primary mr-1"></i> 4815mAh</div>
+                            </div>
+                            <a href="#" class="block w-full text-center bg-primary text-white font-medium py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                                查看详情
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 手机卡片 4 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                        <div class="relative h-56 overflow-hidden bg-gray-100">
+                            <img src="https://picsum.photos/seed/phone5/400/300" alt="小米 13 Pro" class="w-full h-full object-cover transform transition-transform hover:scale-105">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-1">小米 13 Pro</h3>
+                            <p class="text-gray-500 text-sm mb-3">小米 | Android 13</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-primary font-bold text-xl">¥4,999起</span>
+                                <div class="flex items-center text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="text-gray-600 text-sm ml-1">(102)</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-sm text-gray-600 mb-4">
+                                <div class="flex items-center"><i class="fas fa-memory text-primary mr-1"></i> 12GB RAM</div>
+                                <div class="flex items-center"><i class="fas fa-hdd text-primary mr-1"></i> 256GB ROM</div>
+                                <div class="flex items-center"><i class="fas fa-camera text-primary mr-1"></i> 5000万像素</div>
+                                <div class="flex items-center"><i class="fas fa-battery-full text-primary mr-1"></i> 4820mAh</div>
+                            </div>
+                            <a href="#" class="block w-full text-center bg-primary text-white font-medium py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                                查看详情
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 品牌大全区域 -->
+        <section id="brands" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-10 text-center">品牌大全</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <!-- 品牌Logo 1 -->
+                    <a href="#" class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+                            <img src="https://picsum.photos/seed/brand1/100/100" alt="苹果" class="w-12 h-12 object-contain">
+                        </div>
+                        <span class="font-medium">苹果</span>
+                    </a>
+
+                    <!-- 品牌Logo 2 -->
+                    <a href="#" class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+                            <img src="https://picsum.photos/seed/brand2/100/100" alt="三星" class="w-12 h-12 object-contain">
+                        </div>
+                        <span class="font-medium">三星</span>
+                    </a>
+
+                    <!-- 品牌Logo 3 -->
+                    <a href="#" class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+                            <img src="https://picsum.photos/seed/brand3/100/100" alt="华为" class="w-12 h-12 object-contain">
+                        </div>
+                        <span class="font-medium">华为</span>
+                    </a>
+
+                    <!-- 品牌Logo 4 -->
+                    <a href="#" class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+                            <img src="https://picsum.photos/seed/brand4/100/100" alt="小米" class="w-12 h-12 object-contain">
+                        </div>
+                        <span class="font-medium">小米</span>
+                    </a>
+
+                    <!-- 品牌Logo 5 -->
+                    <a href="#" class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+                            <img src="https://picsum.photos/seed/brand5/100/100" alt="OPPO" class="w-12 h-12 object-contain">
+                        </div>
+                        <span class="font-medium">OPPO</span>
+                    </a>
+
+                    <!-- 品牌Logo 6 -->
+                    <a href="#" class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+                            <img src="https://picsum.photos/seed/brand6/100/100" alt="vivo" class="w-12 h-12 object-contain">
+                        </div>
+                        <span class="font-medium">vivo</span>
+                    </a>
+
+                    <!-- 更多品牌Logo -->
+                    <a href="#" class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+                            <img src="https://picsum.photos/seed/brand7/100/100" alt="一加" class="w-12 h-12 object-contain">
+                        </div>
+                        <span class="font-medium">一加</span>
+                    </a>
+
+                    <a href="#" class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+                            <img src="https://picsum.photos/seed/brand8/100/100" alt="魅族" class="w-12 h-12 object-contain">
+                        </div>
+                        <span class="font-medium">魅族</span>
+                    </a>
+
+                    <a href="#" class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+                            <img src="https://picsum.photos/seed/brand9/100/100" alt="中兴" class="w-12 h-12 object-contain">
+                        </div>
+                        <span class="font-medium">中兴</span>
+                    </a>
+
+                    <a href="#" class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+                            <img src="https://picsum.photos/seed/brand10/100/100" alt="努比亚" class="w-12 h-12 object-contain">
+                        </div>
+                        <span class="font-medium">努比亚</span>
+                    </a>
+
+                    <a href="#" class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+                            <img src="https://picsum.photos/seed/brand11/100/100" alt="联想" class="w-12 h-12 object-contain">
+                        </div>
+                        <span class="font-medium">联想</span>
+                    </a>
+
+                    <a href="#" class="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+                            <img src="https://picsum.photos/seed/brand12/100/100" alt="realme" class="w-12 h-12 object-contain">
+                        </div>
+                        <span class="font-medium">realme</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 手机对比区域 -->
+        <section id="compare" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-10 text-center">手机对比</h2>
+                <div class="bg-white rounded-xl p-6 shadow-md mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="relative">
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <option value="">选择第一部手机</option>
+                                <option value="iphone14pro">iPhone 14 Pro</option>
+                                <option value="s23ultra">三星 Galaxy S23 Ultra</option>
+                                <option value="p60pro">华为 P60 Pro</option>
+                                <option value="mi13pro">小米 13 Pro</option>
+                                <!-- 更多手机选项 -->
+                            </select>
+                            <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <button class="bg-gray-100 text-gray-600 p-2 rounded-lg hover:bg-gray-200 transition-colors">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </div>
+                        <div class="relative">
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <option value="">选择第二部手机</option>
+                                <option value="iphone14pro">iPhone 14 Pro</option>
+                                <option value="s23ultra">三星 Galaxy S23 Ultra</option>
+                                <option value="p60pro">华为 P60 Pro</option>
+                                <option value="mi13pro">小米 13 Pro</option>
+                                <!-- 更多手机选项 -->
+                            </select>
+                            <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="button" class="bg-primary text-white font-medium px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors shadow-md flex items-center space-x-2 mx-auto">
+                            <i class="fas fa-balance-scale"></i>
+                            <span>开始对比</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 对比结果预览 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hidden" id="comparison-result">
+                    <div class="grid grid-cols-3 border-b border-gray-200">
+                        <div class="py-4 px-6 font-medium text-gray-500">参数</div>
+                        <div class="py-4 px-6 font-medium text-primary">iPhone 14 Pro</div>
+                        <div class="py-4 px-6 font-medium text-primary">三星 Galaxy S23 Ultra</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">价格</div>
+                        <div class="py-4 px-6">¥7,999起</div>
+                        <div class="py-4 px-6">¥8,999起</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">处理器</div>
+                        <div class="py-4 px-6">A16 仿生芯片</div>
+                        <div class="py-4 px-6">骁龙 8 Gen 2</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">内存</div>
+                        <div class="py-4 px-6">12GB</div>
+                        <div class="py-4 px-6">12GB</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">存储</div>
+                        <div class="py-4 px-6">128GB/256GB/512GB/1TB</div>
+                        <div class="py-4 px-6">256GB/512GB/1TB</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">屏幕尺寸</div>
+                        <div class="py-4 px-6">6.1英寸</div>
+                        <div class="py-4 px-6">6.8英寸</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">电池容量</div>
+                        <div class="py-4 px-6">3200mAh</div>
+                        <div class="py-4 px-6">5000mAh</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">摄像头</div>
+                        <div class="py-4 px-6">4800万像素主摄+1200万像素超广角+1200万像素长焦</div>
+                        <div class="py-4 px-6">2亿像素主摄+1200万像素超广角+1000万像素长焦+1000万像素潜望式长焦</div>
+                    </div>
+                    <div class="grid grid-cols-3 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">操作系统</div>
+                        <div class="py-4 px-6">iOS 16</div>
+                        <div class="py-4 px-6">Android 13</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 行业资讯区域 -->
+        <section id="news" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-10">
+                    <h2 class="text-3xl font-bold">行业资讯</h2>
+                    <a href="#" class="text-primary hover:text-blue-600 font-medium flex items-center space-x-1">
+                        <span>查看全部</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- 资讯卡片 1 -->
+                    <div class="bg-gray-50 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow card-hover">
+                        <div class="h-48 overflow-hidden bg-gray-200">
+                            <img src="https://picsum.photos/seed/news1/600/400" alt="最新手机芯片技术解析" class="w-full h-full object-cover transform transition-transform hover:scale-105">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center text-sm text-gray-500 mb-3">
+                                <span>2023-06-15</span>
+                                <span class="mx-2">•</span>
+                                <span>技术解析</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 line-clamp-2">最新手机芯片技术解析：性能与功耗的平衡之道</h3>
+                            <p class="text-gray-600 mb-4 line-clamp-3">随着移动处理器技术的不断进步，各大芯片制造商都在努力提升性能的同时降低功耗。本文将深入分析最新一代手机芯片的技术特点和创新之处...</p>
+                            <a href="#" class="text-primary hover:text-blue-600 font-medium flex items-center space-x-1">
+                                <span>阅读更多</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 资讯卡片 2 -->
+                    <div class="bg-gray-50 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow card-hover">
+                        <div class="h-48 overflow-hidden bg-gray-200">
+                            <img src="https://picsum.photos/seed/news2/600/400" alt="2023年智能手机拍照技术趋势" class="w-full h-full object-cover transform transition-transform hover:scale-105">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center text-sm text-gray-500 mb-3">
+                                <span>2023-06-10</span>
+                                <span class="mx-2">•</span>
+                                <span>拍照技术</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 line-clamp-2">2023年智能手机拍照技术趋势：从像素竞赛到计算摄影</h3>
+                            <p class="text-gray-600 mb-4 line-clamp-3">如今的智能手机拍照已经不再是简单的像素竞赛，计算摄影技术的发展让手机拍照质量得到了质的飞跃。本文将探讨2023年手机拍照技术的最新趋势...</p>
+                            <a href="#" class="text-primary hover:text-blue-600 font-medium flex items-center space-x-1">
+                                <span>阅读更多</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 资讯卡片 3 -->
+                    <div class="bg-gray-50 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow card-hover">
+                        <div class="h-48 overflow-hidden bg-gray-200">
+                            <img src="https://picsum.photos/seed/news3/600/400" alt="折叠屏手机市场分析" class="w-full h-full object-cover transform transition-transform hover:scale-105">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center text-sm text-gray-500 mb-3">
+                                <span>2023-06-05</span>
+                                <span class="mx-2">•</span>
+                                <span>市场分析</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 line-clamp-2">折叠屏手机市场分析：从高端小众到大众普及还要多久？</h3>
+                            <p class="text-gray-600 mb-4 line-clamp-3">折叠屏手机作为智能手机形态创新的代表，已经走过了几年的发展历程。本文将分析当前折叠屏手机市场的现状、挑战以及未来的发展前景...</p>
+                            <a href="#" class="text-primary hover:text-blue-600 font-medium flex items-center space-x-1">
+                                <span>阅读更多</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 订阅区域 -->
+        <section class="py-16 bg-gradient-to-r from-primary to-blue-700 text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold mb-4">订阅获取最新手机资讯</h2>
+                <p class="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+                    第一时间获取最新手机发布信息、详细参数对比和专业购买建议，让您的购机决策更加明智。
+                </p>
+                <form class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
+                    <input
+                        type="email"
+                        placeholder="请输入您的邮箱地址"
+                        class="flex-1 w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-accent"
+                        required
+                    >
+                    <button type="submit" class="bg-accent hover:bg-yellow-500 text-white font-medium px-6 py-3 rounded-lg transition-colors shadow-lg whitespace-nowrap">
+                        立即订阅
+                    </button>
+                </form>
+                <p class="text-sm text-blue-200 mt-4">
+                    我们尊重您的隐私，绝不会向第三方分享您的信息。
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-mobile-alt text-2xl text-primary"></i>
+                        <h3 class="text-xl font-bold">手机参数数据库</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        提供最全面、最准确的手机参数信息，帮助您做出明智的购买决策。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-weixin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#featured" class="text-gray-400 hover:text-white transition-colors">热门机型</a></li>
+                        <li><a href="#brands" class="text-gray-400 hover:text-white transition-colors">品牌大全</a></li>
+                        <li><a href="#compare" class="text-gray-400 hover:text-white transition-colors">手机对比</a></li>
+                        <li><a href="#news" class="text-gray-400 hover:text-white transition-colors">行业资讯</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">购买指南</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">关于我们</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">公司简介</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">联系我们</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">加入我们</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">隐私政策</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">使用条款</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">联系我们</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-primary"></i>
+                            <span>北京市海淀区中关村科技园区</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-primary"></i>
+                            <span>400-123-4567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-primary"></i>
+                            <span>contact@mobileinfo.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    © 2025 手机参数数据库 版权所有
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">隐私政策</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">使用条款</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">网站地图</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 存储全局手机数据
+        let allMobiles = [];
+        let allBrands = [];
+        
+        // 移动端菜单切换
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('py-3');
+            } else {
+                header.classList.add('py-3');
+                header.classList.remove('py-2');
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({ 
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    // 关闭移动端菜单
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // 初始化搜索功能
+        function initSearch() {
+            // 顶部搜索框
+            const topSearchInput = document.querySelector('header .relative input[type="text"]');
+            if (topSearchInput) {
+                topSearchInput.addEventListener('input', function(e) {
+                    searchMobiles(e.target.value);
+                });
+            }
+            
+            // 移动端搜索框
+            const mobileSearchInput = document.querySelector('.md\:hidden .relative input[type="text"]');
+            if (mobileSearchInput) {
+                mobileSearchInput.addEventListener('input', function(e) {
+                    searchMobiles(e.target.value);
+                });
+            }
+            
+            // 高级搜索表单
+            const advancedSearchForm = document.querySelector('#search form');
+            if (advancedSearchForm) {
+                const searchButton = advancedSearchForm.querySelector('button[type="button"]');
+                if (searchButton) {
+                    searchButton.addEventListener('click', performAdvancedSearch);
+                }
+            }
+        }
+        
+        // 搜索手机
+        function searchMobiles(keyword) {
+            if (!keyword.trim()) {
+                // 如果搜索框为空，显示热门机型
+                updateFeaturedPhones(allMobiles);
+                return;
+            }
+            
+            // 根据关键词过滤手机
+            const filteredMobiles = allMobiles.filter(phone => 
+                phone.name.toLowerCase().includes(keyword.toLowerCase()) ||
+                phone.brand.toLowerCase().includes(keyword.toLowerCase()) ||
+                phone.specifications.processor.name.toLowerCase().includes(keyword.toLowerCase()) ||
+                phone.specifications.display.size.toLowerCase().includes(keyword.toLowerCase())
+            );
+            
+            // 更新显示的手机列表
+            updateFeaturedPhones(filteredMobiles);
+        }
+        
+        // 执行高级搜索
+        function performAdvancedSearch() {
+            const brandSelect = document.querySelector('#search select:first-of-type');
+            const priceRangeSelect = document.querySelector('#search select:nth-of-type(2)');
+            const screenSizeSelect = document.querySelector('#search select:nth-of-type(3)');
+            const processorSelect = document.querySelector('#search select:nth-of-type(4)');
+            const memorySelect = document.querySelector('#search select:nth-of-type(5)');
+            const storageSelect = document.querySelector('#search select:nth-of-type(6)');
+            
+            // 过滤手机
+            let filteredMobiles = [...allMobiles];
+            
+            // 品牌过滤
+            if (brandSelect && brandSelect.value) {
+                filteredMobiles = filteredMobiles.filter(phone => 
+                    phone.brand.toLowerCase() === brandSelect.value.toLowerCase()
+                );
+            }
+            
+            // 价格区间过滤
+            if (priceRangeSelect && priceRangeSelect.value) {
+                const range = priceRangeSelect.value.split('-');
+                const minPrice = parseInt(range[0]);
+                const maxPrice = range.length > 1 ? parseInt(range[1]) : Infinity;
+                
+                filteredMobiles = filteredMobiles.filter(phone => {
+                    if (priceRangeSelect.value === '5000+') {
+                        return phone.price >= 5000;
+                    }
+                    return phone.price >= minPrice && phone.price <= maxPrice;
+                });
+            }
+            
+            // 屏幕尺寸过滤
+            if (screenSizeSelect && screenSizeSelect.value) {
+                const sizeValue = screenSizeSelect.value;
+                
+                filteredMobiles = filteredMobiles.filter(phone => {
+                    const screenSize = parseFloat(phone.specifications.display.size);
+                    if (sizeValue === 'small') return screenSize < 5.5;
+                    if (sizeValue === 'medium') return screenSize >= 5.5 && screenSize <= 6.5;
+                    if (sizeValue === 'large') return screenSize > 6.5;
+                    return true;
+                });
+            }
+            
+            // 处理器过滤
+            if (processorSelect && processorSelect.value) {
+                const processorType = processorSelect.value.toLowerCase();
+                
+                filteredMobiles = filteredMobiles.filter(phone => {
+                    const processorName = phone.specifications.processor.name.toLowerCase();
+                    if (processorType === 'snapdragon' && processorName.includes('骁龙')) return true;
+                    if (processorType === 'exynos' && processorName.includes('exynos')) return true;
+                    if (processorType === 'kirin' && processorName.includes('麒麟')) return true;
+                    if (processorType === 'apple' && processorName.includes('a')) return true;
+                    if (processorType === 'mediatek' && processorName.includes('天玑')) return true;
+                    return false;
+                });
+            }
+            
+            // 内存过滤
+            if (memorySelect && memorySelect.value) {
+                const memoryValue = memorySelect.value;
+                
+                filteredMobiles = filteredMobiles.filter(phone => {
+                    const ram = phone.specifications.memory.ram;
+                    if (memoryValue === '4gb' && ram.includes('4GB')) return true;
+                    if (memoryValue === '6gb' && ram.includes('6GB')) return true;
+                    if (memoryValue === '8gb' && ram.includes('8GB')) return true;
+                    if (memoryValue === '12gb+' && 
+                        (ram.includes('12GB') || ram.includes('16GB') || ram.includes('24GB'))) return true;
+                    return false;
+                });
+            }
+            
+            // 存储容量过滤
+            if (storageSelect && storageSelect.value) {
+                const storageValue = storageSelect.value;
+                
+                filteredMobiles = filteredMobiles.filter(phone => {
+                    const storage = phone.specifications.memory.storage;
+                    if (storageValue === '64gb' && storage.includes('64GB')) return true;
+                    if (storageValue === '128gb' && storage.includes('128GB')) return true;
+                    if (storageValue === '256gb' && storage.includes('256GB')) return true;
+                    if (storageValue === '512gb+' && 
+                        (storage.includes('512GB') || storage.includes('1TB') || storage.includes('2TB'))) return true;
+                    return false;
+                });
+            }
+            
+            // 更新显示的手机列表
+            updateFeaturedPhones(filteredMobiles);
+        }
+
+        // 初始化查看详情功能
+        function initPhoneDetailModal() {
+            // 创建详情模态框
+            const modalHTML = `
+                <div id="phone-detail-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+                    <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+                        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                        </div>
+                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+                            &#8203;
+                        </span>
+                        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl w-full">
+                            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                <div class="sm:flex sm:items-start">
+                                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title"></h3>
+                                        <div class="mt-2" id="modal-body">
+                                            <!-- 手机详情内容将在这里动态生成 -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:ml-3 sm:w-auto sm:text-sm" id="close-modal">
+                                    关闭
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 添加模态框到页面
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            // 添加关闭模态框事件
+            const closeButton = document.getElementById('close-modal');
+            const modal = document.getElementById('phone-detail-modal');
+            
+            if (closeButton && modal) {
+                closeButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                });
+                
+                // 点击模态框外部关闭
+                modal.addEventListener('click', function(event) {
+                    if (event.target === modal) {
+                        modal.classList.add('hidden');
+                        document.body.classList.remove('overflow-hidden');
+                    }
+                });
+                
+                // ESC键关闭
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                        modal.classList.add('hidden');
+                        document.body.classList.remove('overflow-hidden');
+                    }
+                });
+            }
+        }
+        
+        // 显示手机详情
+        function showPhoneDetail(phoneId) {
+            // 查找手机数据
+            const phone = allMobiles.find(p => p._id === phoneId);
+            if (!phone) return;
+            
+            const modal = document.getElementById('phone-detail-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            
+            if (!modal || !modalTitle || !modalBody) return;
+            
+            // 设置标题
+            modalTitle.textContent = phone.name;
+            
+            // 格式化发布日期
+            const releaseDate = new Date(phone.releaseDate);
+            const formattedDate = `${releaseDate.getFullYear()}-${String(releaseDate.getMonth() + 1).padStart(2, '0')}-${String(releaseDate.getDate()).padStart(2, '0')}`;
+            
+            // 生成详情内容
+            modalBody.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 左侧：图片和基本信息 -->
+                    <div>
+                        <div class="bg-gray-100 rounded-lg p-4 mb-4">
+                            <img src="${phone.images[0]}" alt="${phone.name}" class="w-full h-auto object-contain">
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-2">基本信息</h4>
+                            <p class="mb-1"><span class="text-gray-600">品牌：</span>${phone.brand}</p>
+                            <p class="mb-1"><span class="text-gray-600">价格：</span><span class="text-primary font-bold">¥${phone.price.toLocaleString()}</span></p>
+                            <p class="mb-1"><span class="text-gray-600">发布日期：</span>${formattedDate}</p>
+                            <p class="mb-1"><span class="text-gray-600">评分：</span>
+                                <div class="inline-flex items-center text-yellow-500">
+                                    <i class="fas fa-star"></i>
+                                    <span class="ml-1 text-gray-700">${phone.ratings.average} (${phone.ratings.count}条评价)</span>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 右侧：详细规格 -->
+                    <div>
+                        <h4 class="font-bold mb-3">详细规格</h4>
+                        
+                        <!-- 处理器 -->
+                        <div class="mb-4">
+                            <h5 class="font-medium mb-2">处理器</h5>
+                            <p>${phone.specifications.processor.name}</p>
+                            <p class="text-sm text-gray-500">核心数：${phone.specifications.processor.cores}</p>
+                        </div>
+                        
+                        <!-- 内存与存储 -->
+                        <div class="mb-4">
+                            <h5 class="font-medium mb-2">内存与存储</h5>
+                            <p>RAM: ${phone.specifications.memory.ram} | ROM: ${phone.specifications.memory.storage}</p>
+                        </div>
+                        
+                        <!-- 屏幕 -->
+                        <div class="mb-4">
+                            <h5 class="font-medium mb-2">屏幕</h5>
+                            <p>尺寸：${phone.specifications.display.size}</p>
+                            <p class="text-sm text-gray-500">分辨率：${phone.specifications.display.resolution}</p>
+                            <p class="text-sm text-gray-500">刷新率：${phone.specifications.display.refreshRate}</p>
+                        </div>
+                        
+                        <!-- 摄像头 -->
+                        <div class="mb-4">
+                            <h5 class="font-medium mb-2">摄像头</h5>
+                            <p>主摄：${phone.specifications.camera.main}</p>
+                            <p class="text-sm text-gray-500">前置：${phone.specifications.camera.front}</p>
+                            ${phone.specifications.camera.features ? `<p class="text-sm text-gray-500">特色功能：${phone.specifications.camera.features}</p>` : ''}
+                        </div>
+                        
+                        <!-- 电池 -->
+                        <div class="mb-4">
+                            <h5 class="font-medium mb-2">电池</h5>
+                            <p>容量：${phone.specifications.battery.capacity}</p>
+                            <p class="text-sm text-gray-500">充电：${phone.specifications.battery.charging}</p>
+                        </div>
+                        
+                        <!-- 系统 -->
+                        <div class="mb-4">
+                            <h5 class="font-medium mb-2">操作系统</h5>
+                            <p>${phone.specifications.software.os} ${phone.specifications.software.version}</p>
+                        </div>
+                        
+                        <!-- 网络 -->
+                        <div class="mb-4">
+                            <h5 class="font-medium mb-2">网络</h5>
+                            <p>${phone.specifications.network.type}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 显示模态框
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        // 加载并显示mock数据
+        async function loadMockData() {
+            try {
+                // 加载mockData.json文件
+                const response = await fetch('mockData.json');
+                const data = await response.json();
+                
+                // 保存数据到全局变量
+                allMobiles = data.mobiles || [];
+                allBrands = data.brands || [];
+                
+                // 更新热门机型部分
+                updateFeaturedPhones(allMobiles);
+                
+                // 更新品牌部分
+                updateBrandList(allBrands);
+                
+                // 更新手机对比部分
+                updateComparisonSection(allMobiles);
+                
+                // 更新行业资讯日期
+                updateNewsDates();
+                
+                // 初始化搜索功能
+                initSearch();
+                
+                // 初始化详情模态框
+                initPhoneDetailModal();
+                
+                console.log('2025年最新手机数据加载完成');
+            } catch (error) {
+                console.error('加载数据失败:', error);
+            }
+        }
+
+        // 更新热门机型部分
+        function updateFeaturedPhones(mobiles) {
+            // 查找热门机型区域
+            const featuredSection = document.getElementById('featured');
+            if (!featuredSection) return;
+            
+            // 清空现有的手机列表
+            const phonesGrid = featuredSection.querySelector('.grid.grid-cols-1');
+            if (!phonesGrid) return;
+            
+            // 清空现有内容（保留标题行）
+            while (phonesGrid.children.length > 2) {
+                phonesGrid.removeChild(phonesGrid.lastChild);
+            }
+            
+            // 如果没有搜索结果，显示提示信息
+            if (mobiles.length === 0) {
+                const noResultMsg = document.createElement('div');
+                noResultMsg.className = 'col-span-full text-center py-12';
+                noResultMsg.innerHTML = `
+                    <i class="fas fa-search text-4xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-500 text-lg">未找到匹配的手机</p>
+                `;
+                phonesGrid.appendChild(noResultMsg);
+                return;
+            }
+            
+            // 只显示前6部手机
+            const featuredPhones = mobiles.slice(0, 6);
+            
+            // 添加新的手机卡片
+            featuredPhones.forEach(phone => {
+                const phoneCard = createPhoneCard(phone);
+                phonesGrid.appendChild(phoneCard);
+            });
+        }
+
+        // 创建手机卡片
+        function createPhoneCard(phone) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow card-hover';
+            
+            const releaseDate = new Date(phone.releaseDate);
+            const formattedDate = `${releaseDate.getFullYear()}-${String(releaseDate.getMonth() + 1).padStart(2, '0')}-${String(releaseDate.getDate()).padStart(2, '0')}`;
+            
+            card.innerHTML = `
+                <div class="h-48 overflow-hidden bg-gray-100">
+                    <img src="${phone.images[0]}" alt="${phone.name}" class="w-full h-full object-contain p-4">
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-xl font-bold line-clamp-1">${phone.name}</h3>
+                        <span class="text-primary font-bold">¥${phone.price.toLocaleString()}</span>
+                    </div>
+                    <p class="text-gray-500 mb-4 text-sm">${phone.brand} | 发布日期：${formattedDate}</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-blue-50 text-primary text-xs rounded">${phone.specifications.display.size}</span>
+                        <span class="px-2 py-1 bg-blue-50 text-primary text-xs rounded">${phone.specifications.processor.name}</span>
+                        <span class="px-2 py-1 bg-blue-50 text-primary text-xs rounded">${phone.specifications.memory.ram}</span>
+                        <span class="px-2 py-1 bg-blue-50 text-primary text-xs rounded">${phone.specifications.camera.main}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-yellow-500">
+                            <i class="fas fa-star"></i>
+                            <span class="ml-1 text-gray-700">${phone.ratings.average} (${phone.ratings.count})</span>
+                        </div>
+                        <button class="text-primary hover:text-blue-600 font-medium text-sm view-detail-btn">查看详情</button>
+                    </div>
+                </div>
+            `;
+            
+            // 为查看详情按钮添加事件监听器
+            const detailButton = card.querySelector('.view-detail-btn');
+            if (detailButton) {
+                detailButton.addEventListener('click', function() {
+                    showPhoneDetail(phone._id);
+                });
+            }
+            
+            return card;
+        }
+
+        // 更新品牌列表
+        function updateBrandList(brands) {
+            // 查找品牌区域
+            const brandsSection = document.getElementById('brands');
+            if (!brandsSection) return;
+            
+            // 清空现有的品牌列表
+            const brandsGrid = brandsSection.querySelector('.grid.grid-cols-2');
+            if (!brandsGrid) return;
+            
+            // 清空现有内容（保留标题行）
+            while (brandsGrid.children.length > 2) {
+                brandsGrid.removeChild(brandsGrid.lastChild);
+            }
+            
+            // 添加新的品牌卡片
+            brands.forEach(brand => {
+                const brandCard = createBrandCard(brand);
+                brandsGrid.appendChild(brandCard);
+            });
+        }
+
+        // 创建品牌卡片
+        function createBrandCard(brand) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow flex items-center card-hover';
+            
+            // 替换为实际的品牌logo图片
+            const logoSrc = brand.logo || `https://picsum.photos/seed/${brand.name}/80/80`;
+            
+            card.innerHTML = `
+                <div class="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                    <img src="${logoSrc}" alt="${brand.name}" class="max-w-10 max-h-10 object-contain">
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h3 class="font-bold text-lg mb-1">${brand.name}</h3>
+                    <p class="text-gray-500 text-sm line-clamp-1">${brand.country}</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            `;
+            
+            return card;
+        }
+
+        // 更新手机对比部分
+        function updateComparisonSection(mobiles) {
+            // 查找对比区域
+            const compareSection = document.getElementById('compare');
+            if (!compareSection) return;
+            
+            // 更新对比结果预览
+            const comparisonResult = document.getElementById('comparison-result');
+            if (!comparisonResult) return;
+            
+            // 确保有至少2部手机用于对比
+            if (mobiles.length >= 2) {
+                const phone1 = mobiles[0]; // iPhone 17 Pro Max
+                const phone2 = mobiles[1]; // 三星Galaxy S25 Ultra
+                
+                comparisonResult.innerHTML = `
+                    <div class="grid grid-cols-3 border-b border-gray-200">
+                        <div class="py-4 px-6 font-medium text-gray-500">参数</div>
+                        <div class="py-4 px-6 font-medium text-primary">${phone1.name}</div>
+                        <div class="py-4 px-6 font-medium text-primary">${phone2.name}</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">价格</div>
+                        <div class="py-4 px-6">¥${phone1.price.toLocaleString()}起</div>
+                        <div class="py-4 px-6">¥${phone2.price.toLocaleString()}起</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">处理器</div>
+                        <div class="py-4 px-6">${phone1.specifications.processor.name}</div>
+                        <div class="py-4 px-6">${phone2.specifications.processor.name}</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">内存</div>
+                        <div class="py-4 px-6">${phone1.specifications.memory.ram}</div>
+                        <div class="py-4 px-6">${phone2.specifications.memory.ram}</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">存储</div>
+                        <div class="py-4 px-6">${phone1.specifications.memory.storage}</div>
+                        <div class="py-4 px-6">${phone2.specifications.memory.storage}</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">屏幕尺寸</div>
+                        <div class="py-4 px-6">${phone1.specifications.display.size}</div>
+                        <div class="py-4 px-6">${phone2.specifications.display.size}</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">电池容量</div>
+                        <div class="py-4 px-6">${phone1.specifications.battery.capacity}</div>
+                        <div class="py-4 px-6">${phone2.specifications.battery.capacity}</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">摄像头</div>
+                        <div class="py-4 px-6">${phone1.specifications.camera.main}</div>
+                        <div class="py-4 px-6">${phone2.specifications.camera.main}</div>
+                    </div>
+                    <div class="grid grid-cols-3 hover:bg-gray-50 transition-colors">
+                        <div class="py-4 px-6 font-medium">操作系统</div>
+                        <div class="py-4 px-6">${phone1.specifications.software.os} ${phone1.specifications.software.version}</div>
+                        <div class="py-4 px-6">${phone2.specifications.software.os} ${phone2.specifications.software.version}</div>
+                    </div>
+                `;
+            }
+        }
+
+        // 更新行业资讯日期为当前日期附近
+        function updateNewsDates() {
+            const today = new Date();
+            const newsItems = document.querySelectorAll('#news .text-sm.text-gray-500');
+            
+            newsItems.forEach((item, index) => {
+                const date = new Date(today);
+                date.setDate(date.getDate() - index * 5); // 每篇资讯间隔5天
+                const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+                
+                // 保留分类信息，只更新日期
+                const categoryPart = item.innerHTML.split('•')[1] || '';
+                item.innerHTML = `${formattedDate}<span class="mx-2">•</span>${categoryPart.trim()}`;
+            });
+        }
+
+        // 页面加载完成后加载数据
+        document.addEventListener('DOMContentLoaded', loadMockData);
+    </script>
+</body>
+</html>
